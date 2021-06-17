@@ -1,0 +1,25 @@
+The data is stored in a Oracle 12c2 database.
+
+There are 3 clusters of information of interest:
+1. The data model of the soccer data
+2. The data model of the machine learning results
+3. The views in which the features of the machine learning models are created 
+
+Of all three a model and the descriptions are given:
+1. Data Model Soccer.pdf 
+   Data Model Soccer descriptions.pdf
+2. Data Model Machine Learning Metrics Descriptions.pdf
+   Data Model Machine Learning Metrics.pdf 
+3. Views Machine Learning Features Descriptions.pdf
+   Views Machine Learning Features.pdf
+
+The views are also availabe as tables for performance reasons just adjust the name from '_v' to '_t'
+
+It is possible to query the data using for instance Oracle Sql Developer.
+The user football_select has rights to query the data
+
+username/password:football_select/datashare
+machine:145.33.225.194
+database:orcl
+
+To access the pl/sql functions and procedures, please contact the authors

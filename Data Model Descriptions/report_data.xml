@@ -1,0 +1,1761 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<osdmAllTablesViews:TablesViews xmlns:osdmAllTablesViews="http://oracle.com/datamodeler/reports/tablesviews">
+   <osdmAllTablesViews:ReportCaption>Views Machine Learning Features Descriptions</osdmAllTablesViews:ReportCaption>
+   <osdmAllTablesViews:CompanyName/>
+   <osdmAllTablesViews:UsePageBreaks>true</osdmAllTablesViews:UsePageBreaks>
+   <osdmAllTablesViews:DesignName>Feature Views</osdmAllTablesViews:DesignName>
+   <osdmAllTablesViews:VersionDate>17.06.2021 02:46:56</osdmAllTablesViews:VersionDate>
+   <osdmAllTablesViews:ModelName>Views Machine Learning Features</osdmAllTablesViews:ModelName>
+   <osdmAllTablesViews:TablesViewsCollection>
+      <osdmAllTablesViews:TableViewDetails>
+         <osdmAllTablesViews:ViewName>FOOTBALL.DISTANCE_PERCENTAGE_IND_V</osdmAllTablesViews:ViewName>
+         <osdmAllTablesViews:EncodedViewName>33F6270D-991789F3B95E</osdmAllTablesViews:EncodedViewName>
+         <osdmAllTablesViews:SelectStatement>CREATE OR REPLACE VIEW DISTANCE_PERCENTAGE_IND_V
+AS 
+select id
+,      player_id
+,      game_id
+,      club_id
+,      parameter_code
+,      half_indicator
+,      difference_start_end_prr_ind full_bin
+,      full_game_ind
+,      order_column
+,      ORDER_COLUMN_CONTINUATION
+,      sum_distance
+,      avg_total_distance
+,      round((sum_distance/avg_total_distance)*100,1) perc_comp_avg_sum_total_distance
+,      distance_reached_full_game_ind_f (p_player_id => player_id,
+                                         p_game_id => game_id,
+                                         p_club_id => club_id,
+                                         p_parameter_code => parameter_code,
+                                         p_full_game_ind => full_game_ind,
+                                         p_percentage => 90,
+                                         p_avg_distance => avg_total_distance)avg_sum_total_distance_90_ind
+,      distance_reached_full_game_ind_f (p_player_id => player_id,
+                                         p_game_id => game_id,
+                                         p_club_id => club_id,
+                                         p_parameter_code => parameter_code,
+                                         p_full_game_ind => full_game_ind,
+                                         p_percentage => 95,
+                                         p_avg_distance => avg_total_distance)avg_sum_total_distance_95_ind
+,      distance_reached_full_game_ind_f (p_player_id => player_id,
+                                         p_game_id => game_id,
+                                         p_club_id => club_id,
+                                         p_parameter_code => parameter_code,
+                                         p_full_game_ind => full_game_ind,
+                                         p_percentage => 100,
+                                         p_avg_distance => avg_total_distance)avg_sum_total_distance_100_ind
+,     determine_power_reached_game_ind (p_player_id =>player_id,
+                                        p_game_id => game_id) avg_sum_power_ind
+,      distance
+,      avg_distance_order_column avg_distance_bin
+,      round((distance/avg_distance_order_column)*100,1) perc_comp_avg_distance_bin
+,      case when round((distance/avg_distance_order_column)*100,1) >= 100 then 1 else 0 end avg_distance_bin_ind
+,      avg_sum_distance_order_column avg_sum_distance_bin
+,      round((sum_distance/avg_sum_distance_order_column)*100,1) perc_comp_avg_sum_distance_avg
+,      case when round((sum_distance/avg_sum_distance_order_column)*100,1) >= 100 then 1 else 0 end avg_sum_distance_bin_ind
+from AGG_GAME_ROLLING_AVG_DISTANCE_T
+where AVG_DISTANCE_ORDER_COLUMN &lt;>0</osdmAllTablesViews:SelectStatement>
+         <osdmAllTablesViews:ColumnsCollection>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>1</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>id</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER (9)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>2</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>player_id</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>3</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>game_id</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER (9)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>4</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>club_id</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>5</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>parameter_code</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>VARCHAR2 (5 BYTE)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>6</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>half_indicator</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>VARCHAR2 (3 BYTE)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>7</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>full_bin</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>VARCHAR2 (3 BYTE)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>8</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>full_game_ind</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>VARCHAR2 (3 BYTE)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>9</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>order_column</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>10</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>ORDER_COLUMN_CONTINUATION</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>11</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>sum_distance</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>12</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>avg_total_distance</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>13</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>perc_comp_avg_sum_total_distance</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>14</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>avg_sum_total_distance_90_ind</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>15</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>avg_sum_total_distance_95_ind</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>16</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>avg_sum_total_distance_100_ind</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>17</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>avg_sum_power_ind</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>18</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>distance</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>19</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>avg_distance_bin</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>20</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>perc_comp_avg_distance_bin</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>21</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>avg_distance_bin_ind</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>22</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>avg_sum_distance_bin</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>23</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>perc_comp_avg_sum_distance_avg</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>24</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>avg_sum_distance_bin_ind</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+         </osdmAllTablesViews:ColumnsCollection>
+      </osdmAllTablesViews:TableViewDetails>
+      <osdmAllTablesViews:TableViewDetails>
+         <osdmAllTablesViews:ViewName>FOOTBALL.ML_EE_V</osdmAllTablesViews:ViewName>
+         <osdmAllTablesViews:EncodedViewName>0FF5BE7E-4BF9BD5E429A</osdmAllTablesViews:EncodedViewName>
+         <osdmAllTablesViews:SelectStatement>CREATE OR REPLACE VIEW ML_EE_V
+AS 
+select
+AGGREGATED_GAME_DATA_ID
+,PLAYER_ID
+,GAME_ID
+,CLUB_ID
+,PARAMETER_CODE
+,BIN
+,ORDER_COLUMN_CONTINUATION
+,HALF_INDICATOR
+,FULL_BIN_IND
+,FULL_GAME_IND
+,LP_EE_BIN
+,LP_AVERAGE_EE_BIN
+,      round((LP_EE_BIN/LP_AVERAGE_EE_BIN)*100,1) PERC_LP_EE_LP_AVG_EE_BIN
+,      case when round((LP_EE_BIN/LP_AVERAGE_EE_BIN)*100,1) >= 100 then 1 else 0 end LP_EE_LP_AVG_EE_bin_ind
+
+,LP_SUM_EE_BIN
+,LP_AVERAGE_SUM_EE_BIN
+,      round((LP_SUM_EE_BIN/LP_AVERAGE_SUM_EE_BIN)*100,1) perc_PERC_LP_EE_LP_AVG_EE_SUM_BIN
+,      case when round((LP_SUM_EE_BIN/LP_AVERAGE_SUM_EE_BIN)*100,1) >= 100 then 1 else 0 end PERC_LP_EE_LP_AVG_EE_SUM_BIN_IND
+
+,LP_AVG_SUM_TOTAL_EE
+,determine_ee_total_f(player_id,game_id,parameter_code,'LP') lp_overall_total_sum
+,      case when round((determine_ee_total_f(player_id,game_id,parameter_code,'LP')/LP_AVG_SUM_TOTAL_EE)*100,1) >= 100 then 1 else 0 end LP_TOTAL_IND
+
+,IP_EE_BIN
+,IP_AVERAGE_EE_BIN
+,      round((IP_EE_BIN/IP_AVERAGE_EE_BIN)*100,1) PERC_IP_EE_IP_AVG_EE_BIN
+,      case when round((IP_EE_BIN/IP_AVERAGE_EE_BIN)*100,1) >= 100 then 1 else 0 end IP_EE_IP_AVG_EE_bin_ind
+
+,IP_SUM_EE_BIN
+,IP_AVERAGE_SUM_EE_BIN
+,      round((IP_SUM_EE_BIN/IP_AVERAGE_SUM_EE_BIN)*100,1) perc_PERC_IP_EE_IP_AVG_EE_SUM_BIN
+,      case when round((IP_SUM_EE_BIN/IP_AVERAGE_SUM_EE_BIN)*100,1) >= 100 then 1 else 0 end PERC_IP_EE_IP_AVG_EE_SUM_BIN_IND
+
+,IP_AVG_SUM_TOTAL_EE
+,determine_ee_total_f(player_id,game_id,parameter_code,'IP') ip_overall_total_sum
+,      case when round((determine_ee_total_f(player_id,game_id,parameter_code,'IP')/IP_AVG_SUM_TOTAL_EE)*100,1) >= 100 then 1 else 0 end IP_TOTAL_IND
+
+,HP_EE_BIN
+,HP_AVERAGE_EE_BIN
+,      round((HP_EE_BIN/HP_AVERAGE_EE_BIN)*100,1) PERC_HP_EE_HP_AVG_EE_BIN
+,      case when round((HP_EE_BIN/HP_AVERAGE_EE_BIN)*100,1) >= 100 then 1 else 0 end HP_EE_HP_AVG_EE_bin_ind
+
+,HP_SUM_EE_BIN
+,HP_AVERAGE_SUM_EE_BIN
+,      round((HP_SUM_EE_BIN/HP_AVERAGE_SUM_EE_BIN)*100,1) perc_PERC_HP_EE_HP_AVG_EE_SUM_BIN
+,      case when round((HP_SUM_EE_BIN/HP_AVERAGE_SUM_EE_BIN)*100,1) >= 100 then 1 else 0 end PERC_HP_EE_HP_AVG_EE_SUM_BIN_IND
+
+,HP_AVG_SUM_TOTAL_EE
+,determine_ee_total_f(player_id,game_id,parameter_code,'HP') hp_overall_total_sum
+,      case when round((determine_ee_total_f(player_id,game_id,parameter_code,'HP')/HP_AVG_SUM_TOTAL_EE)*100,1) >= 100 then 1 else 0 end HP_TOTAL_IND
+
+,EP_EE_BIN
+,EP_AVERAGE_EE_BIN
+,      round((EP_EE_BIN/EP_AVERAGE_EE_BIN)*100,1) PERC_EP_EE_EP_AVG_EE_BIN
+,      case when round((EP_EE_BIN/EP_AVERAGE_EE_BIN)*100,1) >= 100 then 1 else 0 end EP_EE_EP_AVG_EE_bin_ind
+
+,EP_SUM_EE_BIN
+,EP_AVERAGE_SUM_EE_BIN
+,      round((EP_SUM_EE_BIN/EP_AVERAGE_SUM_EE_BIN)*100,1) perc_PERC_EP_EE_EP_AVG_EE_SUM_BIN
+,      case when round((EP_SUM_EE_BIN/EP_AVERAGE_SUM_EE_BIN)*100,1) >= 100 then 1 else 0 end PERC_EP_EE_EP_AVG_EE_SUM_BIN_IND
+
+,EP_AVG_SUM_TOTAL_EE
+,determine_ee_total_f(player_id,game_id,parameter_code,'EP') ep_overall_total_sum
+,      case when round((determine_ee_total_f(player_id,game_id,parameter_code,'EP')/EP_AVG_SUM_TOTAL_EE)*100,1) >= 100 then 1 else 0 end EP_TOTAL_IND
+
+,MP_EE_BIN
+,MP_AVERAGE_EE_BIN
+,      round((MP_EE_BIN/MP_AVERAGE_EE_BIN)*100,1) PERC_MP_EE_MP_AVG_EE_BIN
+,      case when round((MP_EE_BIN/MP_AVERAGE_EE_BIN)*100,1) >= 100 then 1 else 0 end MP_EE_MP_AVG_EE_bin_ind
+
+,MP_SUM_EE_BIN
+,MP_AVERAGE_SUM_EE_BIN
+,      round((MP_SUM_EE_BIN/MP_AVERAGE_SUM_EE_BIN)*100,1) perc_PERC_MP_EE_MP_AVG_EE_SUM_BIN
+,      case when round((MP_SUM_EE_BIN/MP_AVERAGE_SUM_EE_BIN)*100,1) >= 100 then 1 else 0 end PERC_MP_EE_MP_AVG_EE_SUM_BIN_IND
+
+,MP_AVG_SUM_TOTAL_EE
+,determine_ee_total_f(player_id,game_id,parameter_code,'MP') mp_overall_total_sum
+,      case when round((determine_ee_total_f(player_id,game_id,parameter_code,'MP')/MP_AVG_SUM_TOTAL_EE)*100,1) >= 100 then 1 else 0 end MP_TOTAL_IND
+,LP_AVG_SUM_TOTAL_EE+IP_AVG_SUM_TOTAL_EE+HP_AVG_SUM_TOTAL_EE+EP_AVG_SUM_TOTAL_EE+MP_AVG_SUM_TOTAL_EE avg_sum_total_EE
+,determine_ee_total_f(player_id,game_id,parameter_code,'LP')+ determine_ee_total_f(player_id,game_id,parameter_code,'IP')+
+ determine_ee_total_f(player_id,game_id,parameter_code,'HP')+ determine_ee_total_f(player_id,game_id,parameter_code,'EP') + determine_ee_total_f(player_id,game_id,parameter_code,'MP') game_sum_total_ee
+,  case when round((determine_ee_total_f(player_id,game_id,parameter_code,'LP')+ determine_ee_total_f(player_id,game_id,parameter_code,'IP')+
+ determine_ee_total_f(player_id,game_id,parameter_code,'HP')+ determine_ee_total_f(player_id,game_id,parameter_code,'EP') + determine_ee_total_f(player_id,game_id,parameter_code,'MP'))
+ /(LP_AVG_SUM_TOTAL_EE+IP_AVG_SUM_TOTAL_EE+HP_AVG_SUM_TOTAL_EE+EP_AVG_SUM_TOTAL_EE+MP_AVG_SUM_TOTAL_EE)*100,1) >= 100 then 1 else 0 end EE_TOTAL_100_IND
+,  case when round((determine_ee_total_f(player_id,game_id,parameter_code,'LP')+ determine_ee_total_f(player_id,game_id,parameter_code,'IP')+
+ determine_ee_total_f(player_id,game_id,parameter_code,'HP')+ determine_ee_total_f(player_id,game_id,parameter_code,'EP') + determine_ee_total_f(player_id,game_id,parameter_code,'MP'))
+ /(LP_AVG_SUM_TOTAL_EE+IP_AVG_SUM_TOTAL_EE+HP_AVG_SUM_TOTAL_EE+EP_AVG_SUM_TOTAL_EE+MP_AVG_SUM_TOTAL_EE)*100,1) >= 95 then 1 else 0 end EE_TOTAL_95_IND
+, case when round((determine_ee_total_f(player_id,game_id,parameter_code,'LP')+ determine_ee_total_f(player_id,game_id,parameter_code,'IP')+
+ determine_ee_total_f(player_id,game_id,parameter_code,'HP')+ determine_ee_total_f(player_id,game_id,parameter_code,'EP') + determine_ee_total_f(player_id,game_id,parameter_code,'MP'))
+ /(LP_AVG_SUM_TOTAL_EE+IP_AVG_SUM_TOTAL_EE+HP_AVG_SUM_TOTAL_EE+EP_AVG_SUM_TOTAL_EE+MP_AVG_SUM_TOTAL_EE)*100,1) >= 90 then 1 else 0 end EE_TOTAL_90_IND 
+from AGG_GAME_ROLLING_AVG_ENERGY_t</osdmAllTablesViews:SelectStatement>
+         <osdmAllTablesViews:ColumnsCollection>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>1</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>AGGREGATED_GAME_DATA_ID</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>2</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PLAYER_ID</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>3</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>GAME_ID</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER (9)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>4</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>CLUB_ID</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>5</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PARAMETER_CODE</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>VARCHAR2 (5 BYTE)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>6</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>7</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>ORDER_COLUMN_CONTINUATION</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>8</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>HALF_INDICATOR</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>VARCHAR2 (3 BYTE)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>9</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>FULL_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>VARCHAR2 (3 BYTE)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>10</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>FULL_GAME_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>VARCHAR2 (3 BYTE)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>11</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>LP_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>12</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>LP_AVERAGE_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>13</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_LP_EE_LP_AVG_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>14</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>LP_EE_LP_AVG_EE_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>15</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>LP_SUM_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>16</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>LP_AVERAGE_SUM_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>17</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_PERC_LP_EE_LP_AVG_EE_SUM_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>18</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_LP_EE_LP_AVG_EE_SUM_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>19</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>LP_AVG_SUM_TOTAL_EE</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>20</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>LP_OVERALL_TOTAL_SUM</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>21</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>LP_TOTAL_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>22</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>IP_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>23</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>IP_AVERAGE_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>24</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_IP_EE_IP_AVG_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>25</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>IP_EE_IP_AVG_EE_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>26</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>IP_SUM_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>27</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>IP_AVERAGE_SUM_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>28</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_PERC_IP_EE_IP_AVG_EE_SUM_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>29</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_IP_EE_IP_AVG_EE_SUM_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>30</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>IP_AVG_SUM_TOTAL_EE</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>31</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>IP_OVERALL_TOTAL_SUM</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>32</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>IP_TOTAL_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>33</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>HP_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>34</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>HP_AVERAGE_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>35</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_HP_EE_HP_AVG_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>36</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>HP_EE_HP_AVG_EE_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>37</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>HP_SUM_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>38</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>HP_AVERAGE_SUM_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>39</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_PERC_HP_EE_HP_AVG_EE_SUM_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>40</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_HP_EE_HP_AVG_EE_SUM_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>41</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>HP_AVG_SUM_TOTAL_EE</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>42</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>HP_OVERALL_TOTAL_SUM</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>43</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>HP_TOTAL_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>44</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>EP_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>45</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>EP_AVERAGE_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>46</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_EP_EE_EP_AVG_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>47</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>EP_EE_EP_AVG_EE_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>48</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>EP_SUM_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>49</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>EP_AVERAGE_SUM_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>50</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_PERC_EP_EE_EP_AVG_EE_SUM_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>51</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_EP_EE_EP_AVG_EE_SUM_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>52</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>EP_AVG_SUM_TOTAL_EE</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>53</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>EP_OVERALL_TOTAL_SUM</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>54</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>EP_TOTAL_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>55</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>MP_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>56</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>MP_AVERAGE_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>57</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_MP_EE_MP_AVG_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>58</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>MP_EE_MP_AVG_EE_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>59</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>MP_SUM_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>60</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>MP_AVERAGE_SUM_EE_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>61</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_PERC_MP_EE_MP_AVG_EE_SUM_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>62</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_MP_EE_MP_AVG_EE_SUM_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>63</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>MP_AVG_SUM_TOTAL_EE</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>64</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>MP_OVERALL_TOTAL_SUM</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>65</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>MP_TOTAL_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>66</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>AVG_SUM_TOTAL_EE</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>67</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>GAME_SUM_TOTAL_EE</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>68</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>EE_TOTAL_100_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>69</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>EE_TOTAL_95_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>70</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>EE_TOTAL_90_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+         </osdmAllTablesViews:ColumnsCollection>
+      </osdmAllTablesViews:TableViewDetails>
+      <osdmAllTablesViews:TableViewDetails>
+         <osdmAllTablesViews:ViewName>FOOTBALL.ML_SPEEDZONE_V</osdmAllTablesViews:ViewName>
+         <osdmAllTablesViews:EncodedViewName>523C66E8-2A417722010A</osdmAllTablesViews:EncodedViewName>
+         <osdmAllTablesViews:SelectStatement>CREATE OR REPLACE VIEW ML_SPEEDZONE_V
+AS 
+select
+ID
+,AGGREGATED_GAME_DATA_ID
+,PLAYER_ID
+,GAME_ID
+,STARTTIME
+,ENDTIME
+,PARAMETER_CODE
+,HALF_INDICATOR
+,DIFFERENCE_START_END_PRR_IND
+,FULL_GAME_IND
+,BIN
+,ORDER_COLUMN_CONTINUATION
+,CLUB_ID
+,VLIR
+,AVG_VLIR
+,      round((VLIR/AVG_VLIR)*100,1) PERC_VLIR_AVG_VLIR_BIN
+,      case when round((VLIR/AVG_VLIR)*100,1) >= 100 then 1 else 0 end PERC_VLIR_AVG_VLIR_BIN_IND
+,SUM_VLIR
+,vlir_average_sum_bin
+,      round((SUM_VLIR/vlir_average_sum_bin)*100,1) PERC_SUM_VLIR_AVG_SUM_VLIR_BIN
+,      case when round((SUM_VLIR/vlir_average_sum_bin)*100,1) >= 100 then 1 else 0 end PERC_SUM_VLIR_AVG_SUM_VLIR_BIN_IND
+,vlir_average_sum_total
+,determine_speedzone_total_f(player_id,game_id,parameter_code,'VLIR') vlir_overall_total_sum
+,case when round((determine_speedzone_total_f(player_id,game_id,parameter_code,'VLIR')/vlir_average_sum_total)*100,1) >= 100 then 1 else 0 end vlir_TOTAL_IND
+,LIR
+,AVG_LIR
+,      round((LIR/AVG_LIR)*100,1) PERC_LIR_AVG_LIR_BIN
+,      case when round((LIR/AVG_LIR)*100,1) >= 100 then 1 else 0 end PERC_LIR_AVG_LIR_BIN_IND
+,SUM_LIR
+,lir_average_sum_bin 
+,      round((SUM_LIR/lir_average_sum_bin)*100,1) PERC_SUM_LIR_AVG_SUM_LIR_BIN
+,      case when round((SUM_LIR/lir_average_sum_bin)*100,1) >= 100 then 1 else 0 end PERC_SUM_LIR_AVG_SUM_LIR_BIN_IND
+,lir_average_sum_total
+,determine_speedzone_total_f(player_id,game_id,parameter_code,'LIR') lir_overall_total_sum
+,case when round((determine_speedzone_total_f(player_id,game_id,parameter_code,'LIR')/lir_average_sum_total)*100,1) >= 100 then 1 else 0 end lir_TOTAL_IND
+
+,MIR
+,AVG_MIR
+,      round((MIR/AVG_MIR)*100,1) PERC_MIR_AVG_MIR_BIN
+,      case when round((MIR/AVG_MIR)*100,1) >= 100 then 1 else 0 end PERC_MIR_AVG_MIR_BIN_IND
+,SUM_MIR
+,mir_average_sum_bin
+,      round((SUM_MIR/Mir_average_sum_bin)*100,1) PERC_SUM_MIR_AVG_SUM_MIR_BIN
+,      case when round((SUM_MIR/mir_average_sum_bin)*100,1) >= 100 then 1 else 0 end PERC_SUM_MIR_AVG_SUM_MIR_BIN_IND
+,mir_average_sum_total
+,determine_speedzone_total_f(player_id,game_id,parameter_code,'MIR') mir_overall_total_sum
+,      case when round((determine_speedzone_total_f(player_id,game_id,parameter_code,'MIR')/mir_average_sum_total)*100,1) >= 100 then 1 else 0 end mir_TOTAL_IND
+
+,HIR
+,AVG_HIR
+,      round((HIR/AVG_HIR)*100,1) PERC_HIR_AVG_HIR_BIN
+,      case when round((HIR/AVG_HIR)*100,1) >= 100 then 1 else 0 end PERC_HIR_AVG_HIR_BIN_IND
+,SUM_HIR
+,hir_average_sum_bin  
+,      round((SUM_HIR/hir_average_sum_bin)*100,1) PERC_SUM_HIR_AVG_SUM_HIR_BIN
+,      case when round((SUM_HIR/hir_average_sum_bin)*100,1) >= 100 then 1 else 0 end PERC_SUM_HIR_AVG_SUM_HIR_BIN_IND
+,hir_average_sum_total
+,determine_speedzone_total_f(player_id,game_id,parameter_code,'HIR') hir_overall_total_sum
+,      case when round((determine_speedzone_total_f(player_id,game_id,parameter_code,'HIR')/hir_average_sum_total)*100,1) >= 100 then 1 else 0 end hir_TOTAL_IND
+
+,VHIR
+,AVG_VHIR
+,      case when avg_vhir = 0 then 0 else round((VHIR/(AVG_VHIR))*100,1) end PERC_VHIR_AVG_VHIR_BIN
+,      case when avg_vhir = 0 then 0 else case when round((VHIR/AVG_VHIR)*100,1) >= 100 then 1 else 0 end end PERC_VHIR_AVG_VHIR_BIN_IND
+,SUM_VHIR
+,vhir_average_sum_bin  
+,      case when avg_vhir = 0 then 0 else round((SUM_VHIR/vhir_average_sum_bin)*100,1) end PERC_SUM_VHIR_AVG_SUM_VHIR_BIN
+,    case when avg_vhir = 0 then 0  else case when round((SUM_VHIR/vhir_average_sum_bin)*100,1) >= 100 then 1 else 0 end end PERC_SUM_VHIR_AVG_SUM_VHIR_BIN_IND
+,vhir_average_sum_total  
+,determine_speedzone_total_f(player_id,game_id,parameter_code,'VHIR') vhir_overall_total_sum
+, case when round((determine_speedzone_total_f(player_id,game_id,parameter_code,'VHIR')/vhir_average_sum_total)*100,1) >= 100 then 1 else 0 end vhir_TOTAL_IND
+, VLIR_average_SUM_TOTAL+LIR_average_SUM_TOTAL+MIR_average_SUM_TOTAL+HIR_average_SUM_TOTAL+VHIR_average_SUM_TOTAL average_sum_total_distance
+,determine_speedzone_total_f(player_id,game_id,parameter_code,'VLIR')+ determine_speedzone_total_f(player_id,game_id,parameter_code,'LIR')+
+ determine_speedzone_total_f(player_id,game_id,parameter_code,'MIR')+ determine_speedzone_total_f(player_id,game_id,parameter_code,'HIR') + determine_speedzone_total_f(player_id,game_id,parameter_code,'VHIR') game_sum_total_distance
+, case when round((determine_speedzone_total_f(player_id,game_id,parameter_code,'VLIR')+ determine_speedzone_total_f(player_id,game_id,parameter_code,'LIR')+
+ determine_speedzone_total_f(player_id,game_id,parameter_code,'MIR')+ determine_speedzone_total_f(player_id,game_id,parameter_code,'HIR') + determine_speedzone_total_f(player_id,game_id,parameter_code,'VHIR'))
+ /(VLIR_average_SUM_TOTAL+LIR_average_SUM_TOTAL+MIR_average_SUM_TOTAL+HIR_average_SUM_TOTAL+VHIR_average_SUM_TOTAL)*100,1) >= 100 then 1 else 0 end TOTAL_100_IND
+, case when round((determine_speedzone_total_f(player_id,game_id,parameter_code,'VLIR')+ determine_speedzone_total_f(player_id,game_id,parameter_code,'LIR')+
+ determine_speedzone_total_f(player_id,game_id,parameter_code,'MIR')+ determine_speedzone_total_f(player_id,game_id,parameter_code,'HIR') + determine_speedzone_total_f(player_id,game_id,parameter_code,'VHIR'))
+ /(VLIR_average_SUM_TOTAL+LIR_average_SUM_TOTAL+MIR_average_SUM_TOTAL+HIR_average_SUM_TOTAL+VHIR_average_SUM_TOTAL)*100,1) >= 95 then 1 else 0 end TOTAL_95_IND
+, case when round((determine_speedzone_total_f(player_id,game_id,parameter_code,'VLIR')+ determine_speedzone_total_f(player_id,game_id,parameter_code,'LIR')+
+ determine_speedzone_total_f(player_id,game_id,parameter_code,'MIR')+ determine_speedzone_total_f(player_id,game_id,parameter_code,'HIR') + determine_speedzone_total_f(player_id,game_id,parameter_code,'VHIR'))
+ /(VLIR_average_SUM_TOTAL+LIR_average_SUM_TOTAL+MIR_average_SUM_TOTAL+HIR_average_SUM_TOTAL+VHIR_average_SUM_TOTAL)*100,1) >= 90 then 1 else 0 end TOTAL_90_IND
+from AGG_GAME_ROLLING_AVG_SPEEDZONE_V</osdmAllTablesViews:SelectStatement>
+         <osdmAllTablesViews:ColumnsCollection>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>1</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>ID</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER (9)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>2</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>AGGREGATED_GAME_DATA_ID</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER (9)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>3</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PLAYER_ID</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>4</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>GAME_ID</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER (9)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>5</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>STARTTIME</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER (9)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>6</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>ENDTIME</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER (9)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>7</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PARAMETER_CODE</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>VARCHAR2 (5 BYTE)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>8</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>HALF_INDICATOR</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>VARCHAR2 (3 BYTE)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>9</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>DIFFERENCE_START_END_PRR_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>VARCHAR2 (3 BYTE)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>10</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>FULL_GAME_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>VARCHAR2 (3 BYTE)</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>11</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>12</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>ORDER_COLUMN_CONTINUATION</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>13</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>CLUB_ID</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>14</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>VLIR</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>15</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>AVG_VLIR</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>16</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_VLIR_AVG_VLIR_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>17</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_VLIR_AVG_VLIR_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>18</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>SUM_VLIR</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>19</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>VLIR_AVERAGE_SUM_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>20</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_SUM_VLIR_AVG_SUM_VLIR_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>21</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_SUM_VLIR_AVG_SUM_VLIR_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>22</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>VLIR_AVERAGE_SUM_TOTAL</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>23</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>VLIR_OVERALL_TOTAL_SUM</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>24</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>VLIR_TOTAL_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>25</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>LIR</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>26</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>AVG_LIR</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>27</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_LIR_AVG_LIR_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>28</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_LIR_AVG_LIR_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>29</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>SUM_LIR</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>30</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>LIR_AVERAGE_SUM_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>31</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_SUM_LIR_AVG_SUM_LIR_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>32</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_SUM_LIR_AVG_SUM_LIR_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>33</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>LIR_AVERAGE_SUM_TOTAL</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>34</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>LIR_OVERALL_TOTAL_SUM</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>35</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>LIR_TOTAL_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>36</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>MIR</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>37</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>AVG_MIR</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>38</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_MIR_AVG_MIR_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>39</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_MIR_AVG_MIR_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>40</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>SUM_MIR</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>41</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>MIR_AVERAGE_SUM_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>42</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_SUM_MIR_AVG_SUM_MIR_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>43</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_SUM_MIR_AVG_SUM_MIR_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>44</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>MIR_AVERAGE_SUM_TOTAL</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>45</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>MIR_OVERALL_TOTAL_SUM</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>46</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>MIR_TOTAL_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>47</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>HIR</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>48</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>AVG_HIR</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>49</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_HIR_AVG_HIR_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>50</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_HIR_AVG_HIR_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>51</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>SUM_HIR</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>52</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>HIR_AVERAGE_SUM_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>53</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_SUM_HIR_AVG_SUM_HIR_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>54</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_SUM_HIR_AVG_SUM_HIR_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>55</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>HIR_AVERAGE_SUM_TOTAL</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>56</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>HIR_OVERALL_TOTAL_SUM</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>57</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>HIR_TOTAL_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>58</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>VHIR</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>59</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>AVG_VHIR</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>60</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_VHIR_AVG_VHIR_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>61</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_VHIR_AVG_VHIR_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>62</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>SUM_VHIR</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>63</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>VHIR_AVERAGE_SUM_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>64</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_SUM_VHIR_AVG_SUM_VHIR_BIN</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>65</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>PERC_SUM_VHIR_AVG_SUM_VHIR_BIN_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>66</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>VHIR_AVERAGE_SUM_TOTAL</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>67</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>VHIR_OVERALL_TOTAL_SUM</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>68</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>VHIR_TOTAL_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>69</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>AVERAGE_SUM_TOTAL_DISTANCE</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>70</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>GAME_SUM_TOTAL_DISTANCE</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>71</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>TOTAL_100_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>72</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>TOTAL_95_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+            <osdmAllTablesViews:ColumnDetails>
+               <osdmAllTablesViews:Sequence>73</osdmAllTablesViews:Sequence>
+               <osdmAllTablesViews:ColumnName>TOTAL_90_IND</osdmAllTablesViews:ColumnName>
+               <osdmAllTablesViews:PK/>
+               <osdmAllTablesViews:FK/>
+               <osdmAllTablesViews:M/>
+               <osdmAllTablesViews:DataType>NUMBER</osdmAllTablesViews:DataType>
+               <osdmAllTablesViews:Security/>
+            </osdmAllTablesViews:ColumnDetails>
+         </osdmAllTablesViews:ColumnsCollection>
+      </osdmAllTablesViews:TableViewDetails>
+   </osdmAllTablesViews:TablesViewsCollection>
+</osdmAllTablesViews:TablesViews>
