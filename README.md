@@ -2,7 +2,7 @@
 This repository contains the code and the access to the data of the manuscript 'Early Prediction of Physical Performance in Elite Soccer Matches - A Machine Learning Approach to Support 
 Substitutions' 
 
-There are 4 folders
+There are five folders
 
 - Animations containing:\
   Animations notebooks generating movies based on the match data and example movies:\
