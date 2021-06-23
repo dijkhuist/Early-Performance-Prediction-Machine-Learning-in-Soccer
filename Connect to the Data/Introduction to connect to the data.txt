@@ -1,0 +1,35 @@
+The data is stored in a Oracle 12c2 database.
+
+There are 3 clusters of information of interest:
+1. The data model of the soccer data
+2. The data model of the machine learning results
+3. The views in which the features of the machine learning models are created 
+
+Of all three a model and the descriptions are given in the folder Data Model Descriptions:
+1. Data Model Soccer.pdf 
+   Data Model Soccer descriptions.pdf
+2. Data Model Machine Learning Metrics.pdf 
+   Data Model Machine Learning Metrics Descriptions.pdf
+3. Views Machine Learning Features.pdf
+   Views Machine Learning Features Descriptions.pdf
+
+The views are also availabe as tables for performance reasons just adjust the name from '_v' to '_t'
+
+It is possible to query the data using for instance Oracle Sql Developer.
+
+https://www.oracle.com/tools/downloads/sqldev-downloads.html
+
+The user football_select has rights to query the data
+
+username/password:football_select/datashare
+machine:145.33.225.194
+database:orcl
+
+To access the code of pl/sql functions and procedures, please contact the authors of 'Early Prediction of Physical Performance in Elite Soccer Matches - A Machine Learning Approach to Support Substitutions' 
+
+For accessing the data using the Jupiter notebooks please install cx_oracle:
+https://oracle.github.io/python-cx_Oracle/
+
+and sqlalchemy:
+https://www.sqlalchemy.org/
+
