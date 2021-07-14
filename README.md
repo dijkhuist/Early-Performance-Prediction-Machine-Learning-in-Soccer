@@ -22,7 +22,7 @@ There are five folders
   -The description of the views containing the realized features for the algorithms:\
    Views Machine Learning Features.pdf and Views Machine Learning Features Descriptions.pdf 
    
-- Description, Visualization and Statistics containing:\
+- Visualization and Statistics containing:\
   -The notebooks with the description of the data, visualisation of the data and the statistics of the data categorized by the three variables\
   Energy expenditure in power category, Distance in speedcategory and Distance covered. The information was conducted for both entire match players and substitutes.\
   -Visualizations and Statistics Distance covered entite match.ipynb(also containing the description but the name length is limited)\
