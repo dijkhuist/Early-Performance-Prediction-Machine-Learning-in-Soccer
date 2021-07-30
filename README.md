@@ -1,5 +1,5 @@
 # Early-Performance-Prediction-Machine-Learning-in-Soccer
-This repository contains the code and the access to the data of the publication 'Early Prediction of Physical Performance in Elite Soccer Matches - A Machine Learning Approach to Support Substitutions', Entropy, Data Analytics in Sports Sciences: Changing the Game,2021 
+This repository contains the code and the access to the data of the publication 'Early Prediction of Physical Performance in Elite Soccer Matches - A Machine Learning Approach to Support Substitutions', Entropy, Data Analytics in Sports Sciences: Changing the Game, 2021. 
 
 There are five folders
 
