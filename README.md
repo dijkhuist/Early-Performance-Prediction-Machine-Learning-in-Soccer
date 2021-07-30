@@ -39,7 +39,7 @@ There are five folders
    -Soccer Notebook to predict on Energy Expenditure in powercategory.ipynb
   
   Machine Learning Models\
-  folder: app=>pickeled_models => all generated machine models (sometimes in rar because the limit of github, please extract to use)
+  folder: app=>pickled_models => all generated machine models (sometimes in rar because the limit of github, please extract to use)
   
 -
  
